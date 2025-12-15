@@ -31,4 +31,10 @@
     "**/*.mts"
   ],
   "exclude": ["node_modules"]
+  ,
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

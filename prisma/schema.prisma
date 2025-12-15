@@ -1,0 +1,43 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL") // Uncomment if using Supabase/Neon
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  createdAt DateTime  @default(now())
+  services  Service[]
+  bookings  Booking[] // Bookings made FOR this user (merchant)
+}
+
+model Service {
+  id        String    @id @default(cuid())
+  name      String
+  price     Int       // Stored in cents (e.g., 1000 = DA10.00)
+  duration  Int       // In minutes
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  bookings  Booking[]
+}
+
+model Booking {
+  id            String   @id @default(cuid())
+  customerName  String
+  customerEmail String
+  date          DateTime
+  status        String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  serviceId     String
+  service       Service  @relation(fields: [serviceId], references: [id])
+  userId        String   // The merchant who owns this booking
+  user          User     @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+}
