@@ -15,7 +15,7 @@ export default async function BookingPage() {
           
           {/* Header & Contact */}
           <div>
-            <h1 className="text-5xl font-extrabold text-black tracking-tight mb-6">Portfolio Barber.</h1>
+            <h1 className="text-5xl font-extrabold text-black tracking-tight mb-6">SYX Barber.</h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               Experience the best grooming service in town. Professional cuts, 
               relaxing atmosphere, and premium products.
